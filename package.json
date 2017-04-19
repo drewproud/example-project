@@ -1,5 +1,5 @@
 {
-  "name": "ASAPP messaging",
+  "name": "messaging-app",
   "version": "1.0.0",
   "description": "Example project for ASAPP",
   "scripts": {
@@ -25,10 +25,13 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
+    "css-loader": "^0.28.0",
     "jest": "^19.0.2",
+    "normalize.css": "^6.0.0",
     "ramda": "^0.23.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "style-loader": "^0.16.1",
     "styled-components": "^1.4.5"
   },
   "jest": {
