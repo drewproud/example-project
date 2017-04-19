@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
-import MessageType from './MessageType';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 
 const ChatBoxContainer = styled.div`
   width: 300px;
+  margin-left: 1em;
 `;
 
 const ChatBody = styled.div`
@@ -33,7 +33,10 @@ const ChatHeader = styled.a`
 
 class ChatBox extends Component {
   static propTypes = {
-    messages: PropTypes.arrayOf(MessageType).isRequired,
+    messages: PropTypes.arrayOf(PropTypes.shape({
+      userId: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+    })).isRequired,
     onMessageSend: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired,
   };

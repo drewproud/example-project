@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
-import MessageType from './MessageType';
 
 const Content = styled.p`
   color: #636363;
@@ -15,7 +14,10 @@ const UserName = styled.div`
 
 class ChatMessage extends Component {
   static propTypes = {
-    message: MessageType.isRequired,
+    message: PropTypes.shape({
+      userId: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+    }).isRequired,
     userId: PropTypes.string.isRequired,
   };
 
