@@ -8,7 +8,10 @@ const InputForm = styled.form`
 
 const Input = styled.input`
   flex: 1;
-  padding: 0.5em;
+  padding: 0.5em 1em;
+  &:focus {
+    outline: none;
+  }
 `;
 
 

@@ -6,6 +6,7 @@ import ChatInput from './ChatInput';
 const ChatBoxContainer = styled.div`
   width: 300px;
   margin-left: 1em;
+  font-size: 14px;
 `;
 
 const ChatBody = styled.div`
@@ -39,6 +40,7 @@ class ChatBox extends Component {
     })).isRequired,
     onMessageSend: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired,
+    targetUserId: PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -55,11 +57,11 @@ class ChatBox extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { messages, onMessageSend, userId } = this.props;
+    const { messages, onMessageSend, userId, targetUserId } = this.props;
 
     return (
       <ChatBoxContainer>
-        <ChatHeader onClick={ this.toggleOpen }>{ userId }</ChatHeader>
+        <ChatHeader onClick={ this.toggleOpen }>{ targetUserId }</ChatHeader>
         { isOpen &&
           <ChatOpen>
             <ChatBody>
@@ -71,7 +73,7 @@ class ChatBox extends Component {
                 />,
               ) }
             </ChatBody>
-            <ChatInput userId={ userId } onSubmit={ onMessageSend } />
+            <ChatInput targetUserId={ targetUserId } userId={ userId } onSubmit={ onMessageSend } />
           </ChatOpen>
         }
       </ChatBoxContainer>

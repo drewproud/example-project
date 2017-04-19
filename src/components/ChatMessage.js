@@ -1,15 +1,30 @@
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import styled from 'styled-components';
 
-const Content = styled.p`
+const Content = styled.div`
   color: #636363;
-  display: inline-flex;
+  padding-left: 0.5em;
+`;
+
+const Message = styled.div`
+  margin: 1em 0;
+`;
+
+const MessageInfo = styled.div`
+  padding: 0.5em 0;
+  font-size: 14px;
 `;
 
 const UserName = styled.div`
-  color: #7fcece;
+  color: ${props => props.isOwnMessage ? '#7f8fce' : '#7fcece'};
   display: inline-flex;
-  padding-right: 1em;
+`;
+
+const Timestamp = styled.div`
+  color: grey;
+  display: inline-flex;
+  padding-left: 0.5em;
 `;
 
 class ChatMessage extends Component {
@@ -37,17 +52,23 @@ class ChatMessage extends Component {
   }
 
   render() {
-    const { message } = this.props;
+    const { message, userId } = this.props;
+    const isOwnMessage = message.userId === userId;
 
     return (
-      <div ref={ this.setRef }>
-        <UserName>
-          { message.userId }
-        </UserName>
+      <Message innerRef={ this.setRef }>
+        <MessageInfo>
+          <UserName isOwnMessage={ isOwnMessage }>
+            { isOwnMessage ? 'you' : message.userId }
+          </UserName>
+          <Timestamp>
+            { `at ${moment(message.timestamp).format('h:m')}` }
+          </Timestamp>
+        </MessageInfo>
         <Content>
           { message.content }
         </Content>
-      </div>
+      </Message>
     );
   }
 }
