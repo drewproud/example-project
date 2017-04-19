@@ -1,4 +1,4 @@
-import ChatBox from './index';
+import ChatBox from './ChatBox';
 
 describe('ChatBox', () => {
   it('is defined', () => {

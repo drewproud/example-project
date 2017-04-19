@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import MessageType from './MessageType';
 import styled from 'styled-components';
-import ChatInput from './components/ChatInput';
+import ChatInput from './ChatInput';
 
 const ChatBoxContainer = styled.div`
   width: 300px;
@@ -15,8 +15,9 @@ const ChatBody = styled.div`
 
 class ChatBox extends Component {
   static propTypes = {
-    messages: MessageType,
+    messages: PropTypes.arrayOf(MessageType).isRequired,
     userId: PropTypes.string.isRequired,
+    targetUserId: PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -33,7 +34,7 @@ class ChatBox extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { messages, onMessageSend } = this.props;
+    const { messages, onMessageSend, userId, targetUserId } = this.props;
 
     return (
       <ChatBoxContainer>
