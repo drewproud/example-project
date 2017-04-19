@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import R from 'ramda';
-import ChatBox from './components/ChatBox';
+import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
+import ChatBox from './components/ChatBox';
+import MessageType from './components/MessageType';
+import chatService from './services/chatService';
 
 const Div = styled.div`
   top: 0;
@@ -19,33 +20,14 @@ const ChatBoxPosition = styled.div`
   ${props => props.left ? 'left: 0' : 'right: 0'};
 `;
 
-const appendMessage = (userId, content, messages) => R.append({
-  userId,
-  content,
-  timestamp: Date.now(),
-}, messages);
-
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.sendMessage = this.sendMessage.bind(this);
-    this.state = {
-      messages: [],
-    };
-  }
-
-  sendMessage(userId, targetUserId, content) {
-    return new Promise(resolve => {
-      this.setState(oldState => ({
-        messages: appendMessage(userId, content, oldState.messages),
-      }), () => {
-        resolve();
-      });
-    });
-  }
+  static propTypes = {
+    messages: PropTypes.arrayOf(MessageType).isRequired,
+    sendMessage: PropTypes.func.isRequired,
+  };
 
   render() {
-    const { messages } = this.state;
+    const { messages, sendMessage } = this.props;
 
     return (
       <Div>
@@ -53,7 +35,7 @@ class App extends Component {
           <ChatBox
             userId="user1"
             targetUserId="user2"
-            onMessageSend={ this.sendMessage }
+            onMessageSend={ sendMessage }
             messages={ messages }
           />
         </ChatBoxPosition>
@@ -61,7 +43,7 @@ class App extends Component {
           <ChatBox
             userId="user2"
             targetUserId="user1"
-            onMessageSend={ this.sendMessage }
+            onMessageSend={ sendMessage }
             messages={ messages }
           />
         </ChatBoxPosition>
@@ -70,4 +52,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default chatService(App);

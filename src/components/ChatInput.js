@@ -3,20 +3,28 @@ import styled from 'styled-components';
 
 const InputForm = styled.form`
   display: flex;
+  height: 30px;
 `;
 
 const Input = styled.input`
   flex: 1;
+  padding: 0.5em;
 `;
 
 
 const SendButton = styled.button`
-  width: 30px;
+  width: 3em;
+  -webkit-appearance: none;
+  background-color: #7fcece;
+  color: white;
+  border: none;
+  cursor: pointer;
 `;
 
 class ChatInput extends Component {
   static propTypes = {
     userId: PropTypes.string.isRequired,
+    targetUserId: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
   };
 
@@ -31,7 +39,7 @@ class ChatInput extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const { userId, targetUserId } = this.state;
+    const { userId, targetUserId } = this.props;
 
     this.props.onSubmit(userId, targetUserId, this.state.content)
       .then(() => this.setState({ content: '' }));
@@ -47,7 +55,7 @@ class ChatInput extends Component {
     return (
       <InputForm onSubmit={ this.onSubmit }>
         <Input value={ content } onChange={ this.onChange } />
-        <SendButton type="submit" />
+        <SendButton type="submit">{ '>' }</SendButton>
       </InputForm>
     );
   }
