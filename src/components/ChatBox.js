@@ -11,7 +11,7 @@ const ChatBoxContainer = styled.div`
 const ChatBody = styled.div`
   height: 300px;
   background-color: #ecebeb;
-  padding: 1em;
+  padding: 0 1em;
   overflow-y: scroll;
 `;
 
@@ -60,9 +60,15 @@ class ChatBox extends Component {
         { isOpen &&
           <ChatOpen>
             <ChatBody>
-              { messages.map(msg => <ChatMessage key={ msg.timestamp } message={ msg } />) }
+              { messages.map(msg =>
+                <ChatMessage
+                  userId={ userId }
+                  key={ msg.timestamp }
+                  message={ msg }
+                />,
+              ) }
             </ChatBody>
-            <ChatInput onSubmit={ onMessageSend } />
+            <ChatInput userId={ userId } onSubmit={ onMessageSend } />
           </ChatOpen>
         }
       </ChatBoxContainer>

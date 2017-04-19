@@ -1,14 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
 import MessageType from './MessageType';
 
-const MessageContainer = styled.p`
+const Content = styled.p`
   color: #636363;
+  display: inline-flex;
+`;
+
+const UserName = styled.div`
+  color: #7fcece;
+  display: inline-flex;
+  padding-right: 1em;
 `;
 
 class ChatMessage extends Component {
   static propTypes = {
     message: MessageType.isRequired,
+    userId: PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -17,7 +25,9 @@ class ChatMessage extends Component {
   }
 
   componentDidMount() {
-    this.node.scrollIntoView();
+    if (this.node.scrollIntoView) {
+      this.node.scrollIntoView();
+    }
   }
 
   setRef(node) {
@@ -28,9 +38,14 @@ class ChatMessage extends Component {
     const { message } = this.props;
 
     return (
-      <MessageContainer innerRef={ this.setRef }>
-        { message.content }
-      </MessageContainer>
+      <div ref={ this.setRef }>
+        <UserName>
+          { message.userId }
+        </UserName>
+        <Content>
+          { message.content }
+        </Content>
+      </div>
     );
   }
 }
