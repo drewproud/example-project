@@ -49,6 +49,7 @@ Simple is best here. I colocated my specs next to the componets they exercise si
 1. Add a styled-components theme to dry out the CSS
 2. Add one or two happy path end-to-end tests for better coverage using Nightwatch or similar
 3. Test on browsers other than chrome
+4. Find a better abstraction for the isCurrentlyTyping logic
 
 ## Possible future improvements
 1. Diverge interfaces for customer service reps and users based on use case and needs

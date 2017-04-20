@@ -84,7 +84,7 @@ class ChatBox extends Component {
 
     return (
       <ChatBoxContainer>
-        <ChatHeader onClick={ this.toggleOpen }>{ `Chat with ${targetUser.name}` }</ChatHeader>
+        <ChatHeader onClick={ this.toggleOpen }>{ targetUser.name }</ChatHeader>
         { isOpen &&
           <ChatOpen>
             <ChatBody>

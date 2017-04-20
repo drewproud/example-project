@@ -38,6 +38,6 @@ class CurrentlyTypingIndicator extends Component {
   }
 }
 
-export { CurrentlyTypingIndicator };
+export { CurrentlyTypingIndicator as UnwrappedCurrentlyTypingIndicator };
 
 export default withTheme(CurrentlyTypingIndicator);
