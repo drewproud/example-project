@@ -1,7 +1,7 @@
 /* eslint-disable proptypes */
 
 import React, { Component } from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import chatService from './chatService';
 
 function getTestClass({ componentDidMount, componentDidUpdate = () => {} }) {
@@ -113,5 +113,35 @@ describe('chatService', () => {
     });
 
     mount(<WrappedTestClass />);
+  });
+
+  describe('onBeginTyping', () => {
+    it('sets user as typing immediately', (done) => {
+      jest.useFakeTimers();
+
+      const WrappedTestClass = getTestClass({});
+      const wrapper = shallow(<WrappedTestClass />);
+      wrapper.props().onBeginTyping('user1');
+
+      setImmediate(() => {
+        expect(wrapper.prop('usersCurrentlyTyping')).toEqual({ user1: true });
+        done();
+      });
+    });
+
+    it('resets user to not typing after 3 seconds', (done) => {
+      jest.useFakeTimers();
+
+      const WrappedTestClass = getTestClass({});
+      const wrapper = shallow(<WrappedTestClass />);
+      wrapper.props().onBeginTyping('user1');
+
+      setTimeout(() => {
+        expect(wrapper.prop('usersCurrentlyTyping')).toEqual({});
+        done();
+      }, 3000);
+
+      jest.runAllTimers();
+    });
   });
 });

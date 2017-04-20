@@ -8,6 +8,7 @@ describe('<ChatMessage />', () => {
     const message = {
       content: 'Hello',
       userId: 'testUserId1',
+      userName: 'Bob Moses',
       timestamp: Date.now(),
     };
 
@@ -21,10 +22,11 @@ describe('<ChatMessage />', () => {
     expect(wrapper.text()).toEqual(expect.stringContaining('you'));
   });
 
-  it('displays userId of other person', () => {
+  it('displays name of other user', () => {
     const message = {
       content: 'Hello',
       userId: 'testUserId2',
+      userName: 'Bob Moses',
       timestamp: Date.now(),
     };
 
@@ -35,13 +37,14 @@ describe('<ChatMessage />', () => {
       />,
     );
 
-    expect(wrapper.text()).toEqual(expect.stringContaining('testUserId2'));
+    expect(wrapper.text()).toEqual(expect.stringContaining('Bob Moses'));
   });
 
   it('displays the message', () => {
     const message = {
       content: 'Hello',
       userId: 'testUserId1',
+      userName: 'Bob Moses',
       timestamp: Date.now(),
     };
 
@@ -59,6 +62,7 @@ describe('<ChatMessage />', () => {
     const message = {
       content: 'Hello',
       userId: 'testUserId1',
+      userName: 'Bob Moses',
       timestamp: Date.now(),
     };
 

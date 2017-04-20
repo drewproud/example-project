@@ -6,8 +6,6 @@ describe('<ChatInput />', () => {
   it('has an input', () => {
     const wrapper = mount(
       <ChatInput
-        userId="testUserId1"
-        targetUserId="testUserId2"
         onSubmit={ () => {} }
       />,
     );
@@ -18,8 +16,6 @@ describe('<ChatInput />', () => {
   it('has a send button', () => {
     const wrapper = mount(
       <ChatInput
-        userId="testUserId1"
-        targetUserId="testUserId2"
         onSubmit={ () => {} }
       />,
     );
@@ -30,8 +26,6 @@ describe('<ChatInput />', () => {
   it('updates the input after typing', () => {
     const wrapper = mount(
       <ChatInput
-        userId="testUserId1"
-        targetUserId="testUserId2"
         onSubmit={ () => {} }
       />,
     );
@@ -41,17 +35,13 @@ describe('<ChatInput />', () => {
   });
 
   it('submits the correct value', () => {
-    const onSubmit = (userId, targetUserId, content) => {
-      expect(userId).toBe('testUserId1');
-      expect(targetUserId).toBe('testUserId2');
+    const onSubmit = (content) => {
       expect(content).toBe('test message');
       return Promise.resolve();
     };
 
     const wrapper = mount(
       <ChatInput
-        userId="testUserId1"
-        targetUserId="testUserId2"
         onSubmit={ onSubmit }
       />,
     );
@@ -65,8 +55,6 @@ describe('<ChatInput />', () => {
 
     const wrapper = mount(
       <ChatInput
-        userId="testUserId1"
-        targetUserId="testUserId2"
         onSubmit={ onSubmit }
       />,
     );
