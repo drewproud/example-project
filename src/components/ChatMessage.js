@@ -3,7 +3,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 
 const Content = styled.div`
-  color: #636363;
+  color: ${props => props.theme.textColor};
   padding-left: 0.5em;
 `;
 
@@ -17,7 +17,7 @@ const MessageInfo = styled.div`
 `;
 
 const UserName = styled.div`
-  color: ${props => props.isOwnMessage ? '#7f8fce' : '#7fcece'};
+  color: ${props => props.isOwnMessage ? props.theme.primaryLight : props.theme.secondary};
   display: inline-flex;
 `;
 
@@ -62,7 +62,7 @@ class ChatMessage extends Component {
             { isOwnMessage ? 'you' : message.userId }
           </UserName>
           <Timestamp>
-            { `at ${moment(message.timestamp).format('h:mm')}` }
+            { `at ${moment(message.timestamp).format('h:mm a')}` }
           </Timestamp>
         </MessageInfo>
         <Content>

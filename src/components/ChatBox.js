@@ -11,7 +11,7 @@ const ChatBoxContainer = styled.div`
 
 const ChatBody = styled.div`
   height: 300px;
-  background-color: #ecebeb;
+  background-color: ${props => props.theme.background};
   padding: 0 1em;
   overflow-y: scroll;
 `;
@@ -27,7 +27,7 @@ const ChatHeader = styled.a`
   justify-content: center;
   cursor: pointer;
   height: 30px;
-  background-color: #584f8c;
+  background-color: ${props => props.theme.primary};
   color: white;
   border-radius: 4px 4px 0 0;
 `;

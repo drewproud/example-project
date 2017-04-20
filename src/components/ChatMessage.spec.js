@@ -69,6 +69,6 @@ describe('<ChatMessage />', () => {
       />,
     );
 
-    expect(wrapper.text()).toEqual(expect.stringContaining(moment(message.timestamp).format('h:mm')));
+    expect(wrapper.text()).toEqual(expect.stringContaining(moment(message.timestamp).format('h:mm a')));
   });
 });
