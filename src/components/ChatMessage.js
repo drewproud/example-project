@@ -35,6 +35,7 @@ class ChatMessage extends Component {
       content: PropTypes.string.isRequired,
     }).isRequired,
     userId: PropTypes.string.isRequired,
+    children: PropTypes.node,
   };
 
   constructor(props) {
@@ -53,7 +54,7 @@ class ChatMessage extends Component {
   }
 
   render() {
-    const { message, userId } = this.props;
+    const { message, userId, children } = this.props;
     const isOwnMessage = message.userId === userId;
 
     return (
@@ -69,6 +70,7 @@ class ChatMessage extends Component {
         <Content>
           { message.content }
         </Content>
+        { children }
       </Message>
     );
   }

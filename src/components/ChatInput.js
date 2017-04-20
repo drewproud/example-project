@@ -26,6 +26,7 @@ const SendButton = styled.button`
 class ChatInput extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
+    onBeginTyping: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -45,6 +46,7 @@ class ChatInput extends Component {
 
   onChange(e) {
     this.setState({ content: e.target.value });
+    this.props.onBeginTyping();
   }
 
   render() {

@@ -18,10 +18,12 @@ class ChatContainer extends Component {
       content: PropTypes.string.isRequired,
     })).isRequired,
     sendMessage: PropTypes.func.isRequired,
+    onBeginTyping: PropTypes.func.isRequired,
+    usersCurrentlyTyping: PropTypes.objectOf(PropTypes.bool).isRequired,
   };
 
   render() {
-    const { messages, sendMessage } = this.props;
+    const { messages, sendMessage, onBeginTyping, usersCurrentlyTyping } = this.props;
 
     return (
       <ChatPosition>
@@ -29,12 +31,16 @@ class ChatContainer extends Component {
           user={ { id: 'user1', name: 'Laura' } }
           targetUser={ { id: 'user2', name: 'Rob' } }
           onMessageSend={ sendMessage }
+          onBeginTyping={ onBeginTyping }
+          usersCurrentlyTyping={ usersCurrentlyTyping }
           messages={ messages }
         />
         <ChatBox
           user={ { id: 'user2', name: 'Rob' } }
           targetUser={ { id: 'user1', name: 'Laura' } }
           onMessageSend={ sendMessage }
+          onBeginTyping={ onBeginTyping }
+          usersCurrentlyTyping={ usersCurrentlyTyping }
           messages={ messages }
         />
       </ChatPosition>

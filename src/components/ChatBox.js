@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
+import CurrentlyTypingIndicator from './CurrentlyTypingIndicator';
 
 const ChatBoxContainer = styled.div`
   width: 300px;
@@ -48,15 +49,23 @@ class ChatBox extends Component {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
     }).isRequired,
+    onBeginTyping: PropTypes.func.isRequired,
+    usersCurrentlyTyping: PropTypes.objectOf(PropTypes.bool).isRequired,
   };
 
   constructor(props) {
     super(props);
     this.toggleOpen = this.toggleOpen.bind(this);
     this.onMessageSend = this.onMessageSend.bind(this);
+    this.onBeginTyping = this.onBeginTyping.bind(this);
     this.state = {
       isOpen: true,
     };
+  }
+
+  onBeginTyping() {
+    const { id } = this.props.user;
+    return this.props.onBeginTyping(id);
   }
 
   onMessageSend(content) {
@@ -70,7 +79,8 @@ class ChatBox extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { messages, user, targetUser } = this.props;
+    const { messages, user, targetUser, usersCurrentlyTyping } = this.props;
+    const isOtherUserTyping = usersCurrentlyTyping[targetUser.id];
 
     return (
       <ChatBoxContainer>
@@ -78,15 +88,19 @@ class ChatBox extends Component {
         { isOpen &&
           <ChatOpen>
             <ChatBody>
-              { messages.map(msg =>
+              { messages.map((msg, idx) =>
                 <ChatMessage
                   userId={ user.id }
                   key={ msg.timestamp }
                   message={ msg }
-                />,
+                >
+                  { isOtherUserTyping && (idx === messages.length - 1) &&
+                    <CurrentlyTypingIndicator />
+                  }
+                </ChatMessage>,
               ) }
             </ChatBody>
-            <ChatInput onSubmit={ this.onMessageSend } />
+            <ChatInput onBeginTyping={ this.onBeginTyping } onSubmit={ this.onMessageSend } />
           </ChatOpen>
         }
       </ChatBoxContainer>

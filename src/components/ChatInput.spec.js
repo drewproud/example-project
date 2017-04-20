@@ -7,6 +7,7 @@ describe('<ChatInput />', () => {
     const wrapper = mount(
       <ChatInput
         onSubmit={ () => {} }
+        onBeginTyping={ () => {} }
       />,
     );
 
@@ -17,6 +18,7 @@ describe('<ChatInput />', () => {
     const wrapper = mount(
       <ChatInput
         onSubmit={ () => {} }
+        onBeginTyping={ () => {} }
       />,
     );
 
@@ -27,6 +29,7 @@ describe('<ChatInput />', () => {
     const wrapper = mount(
       <ChatInput
         onSubmit={ () => {} }
+        onBeginTyping={ () => {} }
       />,
     );
 
@@ -43,6 +46,7 @@ describe('<ChatInput />', () => {
     const wrapper = mount(
       <ChatInput
         onSubmit={ onSubmit }
+        onBeginTyping={ () => {} }
       />,
     );
 
@@ -56,6 +60,7 @@ describe('<ChatInput />', () => {
     const wrapper = mount(
       <ChatInput
         onSubmit={ onSubmit }
+        onBeginTyping={ () => {} }
       />,
     );
 
