@@ -15,6 +15,13 @@ const getUsersCurrentlyTyping = typing => R.compose(
   R.filter(Boolean),
 )(typing);
 
+const getNewTypingState = R.curry((userId, timeoutId, oldState) => ({
+  typing: {
+    ...oldState.typing,
+    [userId]: timeoutId,
+  },
+}));
+
 function chatService(ComponentToWrap) {
   class ChatService extends Component {
     constructor(props) {
@@ -29,29 +36,24 @@ function chatService(ComponentToWrap) {
 
     onBeginTyping(userId) {
       const timeoutId = setTimeout(() => {
-        this.setState((oldState) => {
-          clearTimeout(oldState.typing[userId]);
-          return {
-            typing: {
-              ...oldState.isTyping,
-              userId: null,
-            },
-          };
-        });
+        this.clearTypingState(userId);
       }, IS_TYPING_DELAY_IN_MS);
 
-      this.setState(oldState => ({
-        typing: {
-          ...oldState.isTyping,
-          [userId]: timeoutId,
-        },
-      }));
+      this.clearTypingState(userId);
+      this.setState(getNewTypingState(userId, timeoutId));
+    }
+
+    clearTypingState(userId) {
+      clearTimeout(this.state.typing[userId]);
+      this.setState(getNewTypingState(userId, null));
     }
 
     // this code is actually synchronous, but it
     // returns a promise to present a consistent API
     // and make swapping this out for redux later simpler
     sendMessage(userId, userName, targetUserId, content) {
+      this.clearTypingState(userId);
+
       return new Promise((resolve) => {
         this.setState(oldState => ({
           messages: appendMessage(userId, content, userName, oldState.messages),
