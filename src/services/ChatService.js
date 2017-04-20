@@ -17,6 +17,9 @@ function chatService(ComponentToWrap) {
       };
     }
 
+    // this code is actually synchronous, but it
+    // returns a promise to present a consistent API
+    // and make swapping this out for redux later simpler
     sendMessage(userId, targetUserId, content) {
       return new Promise((resolve) => {
         this.setState(oldState => ({

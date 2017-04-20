@@ -14,7 +14,6 @@ const Input = styled.input`
   }
 `;
 
-
 const SendButton = styled.button`
   width: 3em;
   -webkit-appearance: none;

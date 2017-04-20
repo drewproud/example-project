@@ -62,7 +62,7 @@ class ChatMessage extends Component {
             { isOwnMessage ? 'you' : message.userId }
           </UserName>
           <Timestamp>
-            { `at ${moment(message.timestamp).format('h:m')}` }
+            { `at ${moment(message.timestamp).format('h:mm')}` }
           </Timestamp>
         </MessageInfo>
         <Content>

@@ -4,15 +4,8 @@ import ChatInput from './ChatInput';
 
 describe('<ChatInput />', () => {
   it('has an input', () => {
-    const messages = [{
-      content: 'Hello',
-      userId: 'testUserId1',
-      timestamp: Date.now(),
-    }];
-
     const wrapper = mount(
       <ChatInput
-        messages={ messages }
         userId="testUserId1"
         targetUserId="testUserId2"
         onSubmit={ () => {} }
@@ -23,15 +16,8 @@ describe('<ChatInput />', () => {
   });
 
   it('has a send button', () => {
-    const messages = [{
-      content: 'Hello',
-      userId: 'testUserId1',
-      timestamp: Date.now(),
-    }];
-
     const wrapper = mount(
       <ChatInput
-        messages={ messages }
         userId="testUserId1"
         targetUserId="testUserId2"
         onSubmit={ () => {} }
@@ -39,5 +25,58 @@ describe('<ChatInput />', () => {
     );
 
     expect(wrapper.find('button[type="submit"]').exists()).toBe(true);
+  });
+
+  it('updates the input after typing', () => {
+    const wrapper = mount(
+      <ChatInput
+        userId="testUserId1"
+        targetUserId="testUserId2"
+        onSubmit={ () => {} }
+      />,
+    );
+
+    wrapper.find('input').simulate('change', { target: { value: 'this is a message' } });
+    expect(wrapper.find('input').node.value).toBe('this is a message');
+  });
+
+  it('submits the correct value', () => {
+    const onSubmit = (userId, targetUserId, content) => {
+      expect(userId).toBe('testUserId1');
+      expect(targetUserId).toBe('testUserId2');
+      expect(content).toBe('test message');
+      return Promise.resolve();
+    };
+
+    const wrapper = mount(
+      <ChatInput
+        userId="testUserId1"
+        targetUserId="testUserId2"
+        onSubmit={ onSubmit }
+      />,
+    );
+
+    wrapper.find('input').simulate('change', { target: { value: 'test message' } });
+    wrapper.find('form').simulate('submit');
+  });
+
+  it('resets state after successful submit', (done) => {
+    const onSubmit = () => Promise.resolve();
+
+    const wrapper = mount(
+      <ChatInput
+        userId="testUserId1"
+        targetUserId="testUserId2"
+        onSubmit={ onSubmit }
+      />,
+    );
+
+    wrapper.find('input').simulate('change', { target: { value: 'test message' } });
+    wrapper.find('form').simulate('submit');
+
+    setImmediate(() => {
+      expect(wrapper.find('input').node.value).toBe('');
+      done();
+    });
   });
 });
