@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import R from 'ramda';
 
-const appendMessage = (userId, content, messages) => R.append({
+const appendMessage = (userId, content, userName, messages) => R.append({
   userId,
+  userName,
   content,
   timestamp: Date.now(),
 }, messages);
@@ -20,10 +21,10 @@ function chatService(ComponentToWrap) {
     // this code is actually synchronous, but it
     // returns a promise to present a consistent API
     // and make swapping this out for redux later simpler
-    sendMessage(userId, targetUserId, content) {
+    sendMessage(userId, userName, targetUserId, content) {
       return new Promise((resolve) => {
         this.setState(oldState => ({
-          messages: appendMessage(userId, content, oldState.messages),
+          messages: appendMessage(userId, content, userName, oldState.messages),
         }), () => {
           resolve();
         });

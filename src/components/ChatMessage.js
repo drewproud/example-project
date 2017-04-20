@@ -31,6 +31,7 @@ class ChatMessage extends Component {
   static propTypes = {
     message: PropTypes.shape({
       userId: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
     }).isRequired,
     userId: PropTypes.string.isRequired,
@@ -59,7 +60,7 @@ class ChatMessage extends Component {
       <Message innerRef={ this.setRef }>
         <MessageInfo>
           <UserName isOwnMessage={ isOwnMessage }>
-            { isOwnMessage ? 'you' : message.userId }
+            { isOwnMessage ? 'you' : message.userName }
           </UserName>
           <Timestamp>
             { `at ${moment(message.timestamp).format('h:mm a')}` }

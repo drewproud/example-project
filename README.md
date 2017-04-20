@@ -45,6 +45,12 @@ Overall, I'm happy with my choice here as it turned out to be a very pleasant ex
 #### Folder structure
 Simple is best here. I colocated my specs next to the componets they exercise since they are tightly coupled and should be maintained in tandem. Otherwise, I chose to split the HOCs into a separate `services/` folder to emphasize the separation of display and state management concerns.
 
-## Possible Improvements
+## Possible current improvements
 1. Add a styled-components theme to dry out the CSS
 2. Add one or two happy path end-to-end tests for better coverage using Nightwatch or similar
+3. Test on browsers other than chrome
+
+## Possible future improvements
+1. Diverge interfaces for customer service reps and users based on use case and needs
+2. Implement server
+3. Add standard UI library for faster UI iteration

@@ -52,7 +52,7 @@ describe('chatService', () => {
 
     const WrappedTestClass = getTestClass({
       componentDidMount() {
-        this.props.sendMessage('testUserId', 'testOtherUserId', 'hello');
+        this.props.sendMessage('testUserId', 'Steve', 'testOtherUserId', 'hello');
       },
       componentDidUpdate() {
         const { messages } = this.props;
@@ -69,7 +69,7 @@ describe('chatService', () => {
 
     const WrappedTestClass = getTestClass({
       componentDidMount() {
-        this.props.sendMessage('testUserId', 'testOtherUserId', 'hello');
+        this.props.sendMessage('testUserId', 'Steve', 'testOtherUserId', 'hello');
       },
       componentDidUpdate() {
         const { messages } = this.props;
@@ -86,11 +86,28 @@ describe('chatService', () => {
 
     const WrappedTestClass = getTestClass({
       componentDidMount() {
-        this.props.sendMessage('testUserId', 'testOtherUserId', 'hello');
+        this.props.sendMessage('testUserId', 'Steve', 'testOtherUserId', 'hello');
       },
       componentDidUpdate() {
         const { messages } = this.props;
         expect(messages[0].userId).toBe('testUserId');
+        done();
+      },
+    });
+
+    mount(<WrappedTestClass />);
+  });
+
+  it('adds the correct userName when sendMessage is called', (done) => {
+    expect.assertions(1);
+
+    const WrappedTestClass = getTestClass({
+      componentDidMount() {
+        this.props.sendMessage('testUserId', 'Steve', 'testOtherUserId', 'hello');
+      },
+      componentDidUpdate() {
+        const { messages } = this.props;
+        expect(messages[0].userName).toBe('Steve');
         done();
       },
     });

@@ -14,6 +14,7 @@ class ChatContainer extends Component {
   static propTypes = {
     messages: PropTypes.arrayOf(PropTypes.shape({
       userId: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
     })).isRequired,
     sendMessage: PropTypes.func.isRequired,
@@ -25,14 +26,14 @@ class ChatContainer extends Component {
     return (
       <ChatPosition>
         <ChatBox
-          userId="user1"
-          targetUserId="user2"
+          user={ { id: 'user1', name: 'Laura' } }
+          targetUser={ { id: 'user2', name: 'Rob' } }
           onMessageSend={ sendMessage }
           messages={ messages }
         />
         <ChatBox
-          userId="user2"
-          targetUserId="user1"
+          user={ { id: 'user2', name: 'Rob' } }
+          targetUser={ { id: 'user1', name: 'Laura' } }
           onMessageSend={ sendMessage }
           messages={ messages }
         />

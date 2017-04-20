@@ -36,19 +36,32 @@ class ChatBox extends Component {
   static propTypes = {
     messages: PropTypes.arrayOf(PropTypes.shape({
       userId: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
     })).isRequired,
     onMessageSend: PropTypes.func.isRequired,
-    userId: PropTypes.string.isRequired,
-    targetUserId: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    targetUser: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
   };
 
   constructor(props) {
     super(props);
     this.toggleOpen = this.toggleOpen.bind(this);
+    this.onMessageSend = this.onMessageSend.bind(this);
     this.state = {
       isOpen: true,
     };
+  }
+
+  onMessageSend(content) {
+    const { id, name } = this.props.user;
+    return this.props.onMessageSend(id, name, this.props.targetUser.id, content);
   }
 
   toggleOpen() {
@@ -57,23 +70,23 @@ class ChatBox extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { messages, onMessageSend, userId, targetUserId } = this.props;
+    const { messages, user, targetUser } = this.props;
 
     return (
       <ChatBoxContainer>
-        <ChatHeader onClick={ this.toggleOpen }>{ targetUserId }</ChatHeader>
+        <ChatHeader onClick={ this.toggleOpen }>{ `Chat with ${targetUser.name}` }</ChatHeader>
         { isOpen &&
           <ChatOpen>
             <ChatBody>
               { messages.map(msg =>
                 <ChatMessage
-                  userId={ userId }
+                  userId={ user.id }
                   key={ msg.timestamp }
                   message={ msg }
                 />,
               ) }
             </ChatBody>
-            <ChatInput targetUserId={ targetUserId } userId={ userId } onSubmit={ onMessageSend } />
+            <ChatInput onSubmit={ this.onMessageSend } />
           </ChatOpen>
         }
       </ChatBoxContainer>

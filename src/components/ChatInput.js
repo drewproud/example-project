@@ -25,8 +25,6 @@ const SendButton = styled.button`
 
 class ChatInput extends Component {
   static propTypes = {
-    userId: PropTypes.string.isRequired,
-    targetUserId: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
   };
 
@@ -41,9 +39,7 @@ class ChatInput extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const { userId, targetUserId } = this.props;
-
-    this.props.onSubmit(userId, targetUserId, this.state.content)
+    this.props.onSubmit(this.state.content)
       .then(() => this.setState({ content: '' }));
   }
 
