@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
-import { ThemeProvider } from 'styled-components';
-import ChatContainer from './components/ChatContainer';
+import styled, { ThemeProvider } from 'styled-components';
+import ChatBoxContainer from './components/ChatBoxContainer';
 import { main } from './theme';
 
-// root component, very little logic here usually
-// This might handle hot loading for dev server if required
+const ChatPosition = styled.div`
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+`;
+
 class App extends Component {
   render() {
     return (
       <ThemeProvider theme={ main }>
-        <ChatContainer />
+        <ChatPosition>
+          <ChatBoxContainer
+            user={ { id: 'user1', name: 'Laura' } }
+            targetUser={ { id: 'user2', name: 'Rob' } }
+          />
+          <ChatBoxContainer
+            user={ { id: 'user2', name: 'Rob' } }
+            targetUser={ { id: 'user1', name: 'Laura' } }
+          />
+        </ChatPosition>
       </ThemeProvider>
     );
   }

@@ -26,7 +26,9 @@ My overarching goal during this project was to maximize simplicity, readability,
 
 
 ### State management
-I decided against implementing a full redux state management system due simplicity of the data management requirements. Instead, I chose to use component-level state where appropriate and managed the chat state through a contained higher order component. I then applied the HOC to the 'container' component which then wired the store to the rest of the app.
+~I decided against implementing a full redux state management system due simplicity of the data management requirements. Instead, I chose to use component-level state where appropriate and managed the chat state through a contained higher order component. I then applied the HOC to the 'container' component which then wired the store to the rest of the app.~
+
+Update: The code for the state management turned out to be less clean once I added the isOtherUserTyping feature. I tried refactoring into redux, and it simplified the code in a way consistent with other Redux apps. Merged in with the only PR.
 
 This approach had the benefits of being:    
 1. Simple

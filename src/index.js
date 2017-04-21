@@ -1,8 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import 'normalize.css';
+import { Provider } from 'react-redux';
 import App from './App';
+import configureStore from './store/configureStore';
 
-// I will usually do setup for state management
-// and routing in this file
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = configureStore();
+
+render(
+  <Provider store={ store }>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
