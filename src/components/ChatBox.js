@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
-import CurrentlyTypingIndicator from './CurrentlyTypingIndicator';
 
 const ChatBoxContainer = styled.div`
   width: 300px;
@@ -93,11 +92,8 @@ class ChatBox extends Component {
                   userId={ user.id }
                   key={ msg.timestamp }
                   message={ msg }
-                >
-                  { isOtherUserTyping && (idx === messages.length - 1) &&
-                    <CurrentlyTypingIndicator />
-                  }
-                </ChatMessage>,
+                  shouldShowTypingIndicator={ isOtherUserTyping && (idx === messages.length - 1) }
+                />,
               ) }
             </ChatBody>
             <ChatInput onBeginTyping={ this.onBeginTyping } onSubmit={ this.onMessageSend } />

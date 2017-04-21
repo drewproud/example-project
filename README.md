@@ -1,6 +1,6 @@
-# ASAPP Example Project
+# Example Chat Project
 
-Created using react [react hot boilerplate](https://github.com/gaearon/react-hot-boilerplate)
+Created using react [react hot boilerplate](https://github.com/gaearon/react-hot-boilerplate). 
 
 ## Installation
 ### Intall the following

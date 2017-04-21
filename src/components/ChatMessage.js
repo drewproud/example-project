@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
+import CurrentlyTypingIndicator from './CurrentlyTypingIndicator';
 
 const Content = styled.div`
   color: ${props => props.theme.textColor};
@@ -35,7 +36,7 @@ class ChatMessage extends Component {
       content: PropTypes.string.isRequired,
     }).isRequired,
     userId: PropTypes.string.isRequired,
-    children: PropTypes.node,
+    shouldShowTypingIndicator: PropTypes.bool,
   };
 
   constructor(props) {
@@ -54,7 +55,7 @@ class ChatMessage extends Component {
   }
 
   render() {
-    const { message, userId, children } = this.props;
+    const { message, userId, shouldShowTypingIndicator } = this.props;
     const isOwnMessage = message.userId === userId;
 
     return (
@@ -70,7 +71,9 @@ class ChatMessage extends Component {
         <Content>
           { message.content }
         </Content>
-        { children }
+        { shouldShowTypingIndicator &&
+          <CurrentlyTypingIndicator />
+        }
       </Message>
     );
   }
