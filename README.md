@@ -3,7 +3,7 @@
 Created using react [react hot boilerplate](https://github.com/gaearon/react-hot-boilerplate). 
 
 ## Installation
-### Intall the following
+### Install the following
 - nvm (or just use the correct version of node specified in `.nvmrc`)
 - yarn (or npm)
 
