@@ -28,14 +28,14 @@ My overarching goal during this project was to maximize simplicity, readability,
 ### State management
 ~I decided against implementing a full redux state management system due simplicity of the data management requirements. Instead, I chose to use component-level state where appropriate and managed the chat state through a contained higher order component. I then applied the HOC to the 'container' component which then wired the store to the rest of the app.~
 
-Update: The code for the state management turned out to be less clean once I added the isOtherUserTyping feature. I tried refactoring into redux, and it simplified the code in a way consistent with other Redux apps. Merged in with the only PR.
+~This approach had the benefits of being:~    
+1. ~Simple~
+2. ~Self-contained and easy to swap out~
+3. ~Very testable~
 
-This approach had the benefits of being:    
-1. Simple
-2. Self-contained and easy to swap out
-3. Very testable
+~The drawbacks would include it requiring some refactoring if we wanted to scale the app and add async server calls.~
 
-The drawbacks would include it requiring some refactoring if we wanted to scale the app and add async server calls.
+**Update**: The code for the state management turned out to be less clean once I added the isOtherUserTyping feature. I tried refactoring into redux, and it simplified the code in a way consistent with other Redux apps. Merged in with the only PR.
 
 ### Styling    
 I decided to use the [styled-components](https://github.com/styled-components/styled-components) library for styling mostly because I wanted to try it out. CSS managment is still an area of active development in the front-end dev community due to the many issues that exist with CSS.
